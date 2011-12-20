@@ -34,4 +34,9 @@ class UploaderListener implements UploaderListenerInterface
     {
         $this->uploader->upload($eventArgs->getEntity());
     }
+    
+    public function postRemove(EventArgs $eventArgs)
+    {
+        $this->uploader->remove($eventArgs->getEntity());
+    }
 }

@@ -7,4 +7,6 @@ interface UploaderInterface
     function preUpload($entity, array $options);
     
     function upload($entity);
+    
+    function remove($entity);
 }

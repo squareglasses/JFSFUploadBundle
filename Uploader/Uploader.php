@@ -60,12 +60,26 @@ class Uploader implements UploaderInterface
         if(null === $this->entityUploader) {
             throw new UploaderException('Uploading impossible, the method "preUpload" must be called.');
         }
-        
         foreach ($this->entityUploader as $propertyUploader)
         {
             $propertyUploader->upload();
         }
         
         $this->entityUploader = null;
+    }
+    
+    public function remove($entity)
+    {
+        $entityConfiguration = $this->configuration->getEntityConfiguration($entity);
+        
+        foreach ($entityConfiguration as $propertyConfiguration)
+        {
+            $getter = $propertyConfiguration->getGetter();
+            $filename = $entity->$getter();
+            
+            if($filename) {
+                @unlink($propertyConfiguration->getDestination() . '/' . $filename);
+            }
+        }
     }
 }

@@ -66,8 +66,7 @@ class PropertyUploader
             $getter = $this->propertyConfiguration->getGetter();
             $filename = $this->entityUploader->getEntity()->{$getter}();
         }
-        
-        $this->uplodedFile->move( $this->propertyConfiguration->getDestination() , $filename );
+	$this->uplodedFile->move( $this->propertyConfiguration->getDestination() , $filename );
 
         unset($this->entityUploader->getEntity()->{ $this->propertyConfiguration->getFile() });
     }

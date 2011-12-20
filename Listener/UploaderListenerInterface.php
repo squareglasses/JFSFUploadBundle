@@ -13,4 +13,6 @@ interface UploaderListenerInterface
     function postPersist(EventArgs $eventArgs);
     
     function postUpdate(EventArgs $eventArgs);
+    
+    function postRemove(EventArgs $eventArgs);
 }
