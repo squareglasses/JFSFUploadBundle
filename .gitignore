@@ -1,0 +1,36 @@
+# Bootstrap
+/app/bootstrap*
+
+# Symfony directories
+/web/bundles/
+/web/uploads/*
+/app/cache/*
+/app/logs/*
+/vendor/*
+
+# Config files
+/app/config/parameters.ini
+
+# For mac os X
+.DS_Store
+
+# For Windows
+Thumbs.db
+*.swp
+
+# For netbeans
+nbproject/
+/catalog.xml
+
+# For Eclipse
+.project
+.buildpath
+.settings/
+
+# For phpstorm
+.idea
+
+# For Ruby Stuff & deploy
+.rvmrc
+.rsync_cache
+rsync_cache

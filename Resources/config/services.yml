@@ -1,0 +1,7 @@
+parameters:
+#    jfsf_upload.example.class: JFSF\Bundle\UploadTestsBundle\Example
+
+services:
+#    jfsf_upload.example:
+#        class: %jfsf_upload_tests.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
