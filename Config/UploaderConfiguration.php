@@ -26,11 +26,7 @@ class UploaderConfiguration implements UploaderConfigurationInterface
                 $entityConfiguration = $entityConfig;
             }
         }
-        
-        if(null === $entityConfiguration) {
-            throw new InvalidConfigurationException(sprintf('The entity class "%s" is not configured for uploader.', get_class($entity)));
-        }
-        
+
         return $entityConfiguration;
     }
 }

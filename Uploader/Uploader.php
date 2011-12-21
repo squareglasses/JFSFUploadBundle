@@ -7,6 +7,7 @@ use JFSF\Bundle\UploadBundle\Config\UploaderConfigurationInterface;
 class Uploader implements UploaderInterface
 { 
     protected $configuration;
+    protected $isPreUpload = false;
     
     protected $options = array(
         'unique_filename' => true,
@@ -45,27 +46,35 @@ class Uploader implements UploaderInterface
     
     public function preUpload($entity, array $options = array())
     {
+        $this->isPreUpload = true;
         $entityConfiguration = $this->configuration->getEntityConfiguration($entity);
-
-        $this->entityUploader = new EntityUploader($this, $entity, $entityConfiguration);
         
-        foreach ($this->entityUploader as $propertyUploader)
-        {
-            $propertyUploader->preUpload($options);
+        if (null !== $entityConfiguration) {
+
+            $this->entityUploader = new EntityUploader($this, $entity, $entityConfiguration);
+
+            foreach ($this->entityUploader as $propertyUploader)
+            {
+                $propertyUploader->preUpload($options);
+            }
         }
     }
     
     public function upload($entity)
     {
-        if(null === $this->entityUploader) {
+        if (false === $this->isPreUpload) {
             throw new UploaderException('Uploading impossible, the method "preUpload" must be called.');
         }
-        foreach ($this->entityUploader as $propertyUploader)
-        {
-            $propertyUploader->upload();
-        }
+        $this->isPreUpload = false;
         
-        $this->entityUploader = null;
+        if (null !== $this->entityUploader) {
+            foreach ($this->entityUploader as $propertyUploader)
+            {
+                $propertyUploader->upload();
+            }
+
+            $this->entityUploader = null;
+        }
     }
     
     public function remove($entity)
